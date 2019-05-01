@@ -15,6 +15,7 @@ import {
    TextInput,
    View
 } from 'react-native';
+import ListItem from './src/components/ListItem/ListItem';
 
 const instructions = Platform.select({
    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -47,7 +48,7 @@ export default class App extends Component<Props> {
    render() {
       const { places, placeName } = this.state;
       const placesOutput = places.map((place, i) => (
-         <Text key={i}>{place}</Text>
+         <ListItem key={i} placeName={place} />
       ));
 
       return (
@@ -65,7 +66,7 @@ export default class App extends Component<Props> {
                   onPress={this.placeSubmitHandler}
                />
             </View>
-            <View>{placesOutput}</View>
+            <View style={styles.listContainer}>{placesOutput}</View>
          </View>
       );
    }
@@ -76,11 +77,12 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
+      padding: 10,
       backgroundColor: '#F5FCFF'
    },
    inputContainer: {
       // flex: 1,
-      // width: '100%',
+      width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center'
@@ -90,5 +92,8 @@ const styles = StyleSheet.create({
    },
    placeButton: {
       width: '30%'
+   },
+   listContainer: {
+      width: '100%'
    }
 });
