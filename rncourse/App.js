@@ -7,15 +7,9 @@
  */
 
 import React, { Component } from 'react';
-import {
-   Button,
-   Platform,
-   StyleSheet,
-   Text,
-   TextInput,
-   View
-} from 'react-native';
-import ListItem from './src/components/ListItem/ListItem';
+import { Platform, StyleSheet, View } from 'react-native';
+import PlaceInput from './src/components/PlaceInput/PlaceInput';
+import PlaceList from './src/components/PlaceList/PlaceList';
 
 const instructions = Platform.select({
    ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -27,46 +21,22 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
    state = {
-      placeName: '',
       places: []
    };
 
-   placeNameChangeHandler = val => {
-      this.setState({ placeName: val });
-   };
-
-   placeSubmitHandler = () => {
-      if (this.state.placeName.trim() === '') {
-         return;
-      }
-
+   placeAddedHandler = placeName => {
       this.setState(prevState => ({
-         places: prevState.places.concat(prevState.placeName)
+         places: prevState.places.concat(placeName)
       }));
    };
 
    render() {
-      const { places, placeName } = this.state;
-      const placesOutput = places.map((place, i) => (
-         <ListItem key={i} placeName={place} />
-      ));
+      const { places } = this.state;
 
       return (
          <View style={styles.container}>
-            <View style={styles.inputContainer}>
-               <TextInput
-                  style={styles.placeInput}
-                  placeholder="An awesome place"
-                  value={placeName}
-                  onChangeText={this.placeNameChangeHandler}
-               />
-               <Button
-                  title="Add"
-                  style={styles.placeButton}
-                  onPress={this.placeSubmitHandler}
-               />
-            </View>
-            <View style={styles.listContainer}>{placesOutput}</View>
+            <PlaceInput onPlaceAdded={this.placeAddedHandler} />
+            <PlaceList places={places} />
          </View>
       );
    }
@@ -79,21 +49,5 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       padding: 10,
       backgroundColor: '#F5FCFF'
-   },
-   inputContainer: {
-      // flex: 1,
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-   },
-   placeInput: {
-      width: '70%'
-   },
-   placeButton: {
-      width: '30%'
-   },
-   listContainer: {
-      width: '100%'
    }
 });
