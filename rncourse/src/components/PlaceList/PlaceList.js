@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import ListItem from '../ListItem/ListItem';
 
-const PlaceList = ({ onItemDeleted, places }) => (
+const PlaceList = ({ onItemSelected, places }) => (
    <FlatList
       style={styles.listContainer}
       data={places}
@@ -10,7 +10,7 @@ const PlaceList = ({ onItemDeleted, places }) => (
          <ListItem
             placeName={item.name}
             placeImage={item.image}
-            onItemPressed={() => onItemDeleted(item.key)}
+            onItemPressed={() => onItemSelected(item.key)}
          />
       )}
    />
