@@ -10,7 +10,7 @@ export const deletePlace = () => ({
 });
 
 export const selectPlace = key => ({
-   type: actionTypes.selectPlace,
+   type: actionTypes.SELECT_PLACE,
    placeKey: key
 });
 
