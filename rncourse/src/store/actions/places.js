@@ -8,12 +8,3 @@ export const addPlace = placeName => ({
 export const deletePlace = () => ({
    type: actionTypes.DELETE_PLACE
 });
-
-export const selectPlace = key => ({
-   type: actionTypes.SELECT_PLACE,
-   placeKey: key
-});
-
-export const deselectPlace = () => ({
-   type: actionTypes.DESELECT_PLACE
-});
