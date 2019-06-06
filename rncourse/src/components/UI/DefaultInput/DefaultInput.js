@@ -1,9 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, TextInput } from 'react-native';
-
-const defaultInput = props => (
-   <TextInput {...props} style={[styles.input, props.style]} />
-);
 
 const styles = StyleSheet.create({
    input: {
@@ -11,8 +8,18 @@ const styles = StyleSheet.create({
       margin: 8,
       padding: 5,
       borderWidth: 1,
-      borderColor: '#eee'
-   }
+      borderColor: '#eee',
+   },
 });
+
+const defaultInput = ({ style, ...rest }) => <TextInput {...rest} style={[styles.input, style]} />;
+
+defaultInput.defaultProps = {
+   style: null,
+};
+
+defaultInput.propTypes = {
+   style: PropTypes.object,
+};
 
 export default defaultInput;
